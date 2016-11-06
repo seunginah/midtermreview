@@ -1,0 +1,50 @@
+\item \textbf{ The difference between fine-tuning, pre-training, and “training from scratch”.}
+\item \textbf{ Why do you need to have a hold-out validation set?}
+\item \textbf{ Know the formal definition of supervised learning. This involves having a training set of examples (xi , yi ) drawn from a specific distribution, where xi ’s are the data vectors and the yi s are the class labels. Then you are given a test set of xi ’s and asked to estimate the class label.}
+\item \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametricmodels are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
+\item \textbf{ What are the advantages and disadvantages of learned representations compared with hand-crafted}
+\item \textbf{ representations (SIFT, HOG, etc.)?}
+\item \textbf{ Differences between regular neural networks and convolutional neural networks. Main justifications for}
+\item \textbf{ CNNs over regular neural networks. }
+\subitem \textbf{ These include the idea that many useful features will be local in the sense that they will only be functions of small areas of the input. While in principle, a standard neural net can learn local features, learning can be faster and more efficient by forcing features to be local. It also dramatically reduces the number of parameters to be learned, which leads to effective training with smaller training sets.}
+\subitem \textbf{ the idea that if a feature is useful at one position in an image, it is likely to be useful at other}
+\item \textbf{ positions in the image. This leads to the idea of having many, many copies of the same feature spread over the image, which can be implemented with convolution. This idea has several advantages. First of all, a feature can be learned by combining data from many different parts of the image through parameter sharing. Second, we can learn a feature for a particular part of the image even if we never saw the feature in that location during training. That means we can get}
+\item \textbf{  away with much less training data.}
+\item \textbf{ What is the difference between gradient descent, stochastic gradient descent (SGD), and mini-batch SGD.}
+\item \textbf{ Know the update rules of SGD, SGD+momentum, Neterov momentum, AdaGrad, RMSProp, Adam.}
+\item \textbf{ What is the difference between these methods with Quasi-Newton methods, i.e. L-BFGS?}
+\item \textbf{ Why L-BFGS is not used as often for training deep neural networks?}
+\item \textbf{ Different types of non-linearities (ReLU (rectified linear unit), leaky ReLU, tanh, logistic, maxout neuron), and how to make the choice in practice. Understand the advantages and disadvantages of each type of non-linearity. Also, make sure you understand why we need non-linearities in the first place. For example, a network built out of only linear layers can only compute linear functions. This is clear if you write the whole function of the network down. A whole sequence of matrix multiplies is equivalent to another matrix multiple, which means the whole network is linear. Note that a linear}
+\item \textbf{ network can only compute linear classification boundaries. Thus, you could never separate classes if you can’t draw a linear boundary between them.}
+\item \textbf{ What is a ”dead ReLU”? How can you tell if your model is suffering from the problem, and how can you deal with it? How can a dead ReLU come back to life?}
+\item \textbf{ Loss functions (negative log loss, multi-class SVM loss, l2 loss, etc.), and how to make the choice in practice.}
+\item \textbf{ Make up your own loss. Can you name an appropriate application and say something good or bad about your loss for it?}
+\item \textbf{ Now what data loss, regularization loss, and total loss are.}
+\item \textbf{ The motivation behind batch normalization, and why it solves the problem. Know the procedure for training time: estimate mini-batch mean and standard deviation, subtract off mean estimate and divide by standard deviation estimate.}
+\item \textbf{ How can a convolutional layer be implemented as a fully connected layer? How can a fully connected layer be implemented as a convolutional layer?}
+\item \textbf{ What is the purpose of regularization? What’s the difference between L2 and L1 regularization? Can you come up with another type of regularization?}
+\item \textbf{ Understand how to address the following situations during training: training loss is equal to validation loss (underfitting); training loss is much much lower than validation loss (overfitting); training loss won’t go down (bad initialization or learning rate too low); training loss goes up (learning rate too high).}
+\item \textbf{ What the problem of disappearing gradients is, and how to deal with it.}
+\item \textbf{ Can two neural networks that have different arrangements of weights produce the exact same function?}
+\item \textbf{ Explain how to take a neural network and rearrange the weights to make an equivalent neural network}
+\item \textbf{ whose weight matrices are different. The professor presented this in class.}
+\item \textbf{ Be able to do show that the derivative of the logistic is f (x)(1 − f (x)). Why is this a useful thing to do? Because we already computed f (x) during the forward pass, so it is very cheap to compute the backward pass.}
+\item \textbf{ Backpropagation. Be able to do the simple examples from class with pencil and paper.}
+\item \textbf{ How to handle branches in backprop.}
+\item \textbf{ Understand how to justify efficient implementations of backprop. For example, if the Jacobian is N ×N , how can I get away with only storing N of its values sometimes? A good example is the derivative of the ReLU function. Since each output of the ReLU is only a function of a single input, all of the “cross derivatives” (element i of input with respect to element j of output) are all 0. Thus, there is no need to store them.}
+\item \textbf{ Why could the accuracy on the training set go up significantly when there is a very small relative change in the loss function of a network, especially right after initialization? Answer: when trainingbegins, most of the output values may have nearly equal probability. Thus, a very small increase of the probability of the correct class may render the probability of the correct class higher than all of the others. Thus, the accuracy would go up despite small changes in the probabilities.}
+\item \textbf{ Suppose I initialize a neural network with small random Gaussian weights. If I have 100 classes, what do I expect the data loss to be after the first forward pass (before the weights have been adapted at all), and why?}
+\item \textbf{ Definition of over-fitting. Why it is a problem, how to tell if you have the issue of over-fitting, and how to deal with it.}
+\item \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: }
+\subitem \textbf{ a) Use a non-square grid (like a hexagonal grid) to better cover the space of hyperparameters settings. }
+\subitem \textbf{ b) Rotate the grid so that there are move diverse samples of the individual\subitem \textbf{ hyperparameter settings. This is important if one of the hyperparameters is relatively unimportant.}
+\item \textbf{ How can over-fitting be used for debugging in practice? Answer: you can test whether your networkcan find a way to make the training error zero for a small data set and 0 regularization. If your network can’t do this, there may be a problem with the backprop. }
+\item \textbf{ Be able to take the derivative of a scalar/vector/matrix w.r.t. a scalar/vector/matrix. What are the shapes of the resulting arrays? }
+\item \textbf{ The difference between model parameters and hyper-parameters.}
+\item \textbf{ Strategies for searching optimal hyper-parameters: random search, grid search, and the ”rotated grid search” idea discussed in class.}
+\item \textbf{ What is a possible cause if training loss explodes?}
+\item \textbf{ What is dropout, and how is it related to the concept of model ensembles?}
+\item \textbf{ Know how to implement ”inverted dropout”, and why it is usually preferred.}
+\item \textbf{ What is the problem with randomly initializing all layers with the same Gaussian, even if those layers are different sizes? How do Xavier initialization and improved Xavier initialization (He et al. 2015) solve the problem? You should know how to implement them.}
+\item \textbf{ What is a Bilinear CNN? You should know the task it is dealing with, the motivation behind the network design, and why the backprop can be done efficiently.}
+\item \textbf{ Does a Bilinear CNN enforce symmetry breaking during training? Discuss whether this is indeed a problem, and if so, how it can be mitigated.
