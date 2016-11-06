@@ -1,19 +1,14 @@
 \documentclass[10pt,letterpaper]{article}
-\usepackage[top=0.25in,bottom=0.25in,left=0.25in,right=0.25in]{geometry}
+\usepackage[top=0.25in,bottom=0.5in,left=0.25in,right=0.25in]{geometry}
 \usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{mydefs}
 \usepackage{notes}
 \usepackage{url}
 
-\title{
-  \textbf{CMPSCI 697L Midterm review}
-}
-
 \date{}
 
 \begin{document}
-\maketitle
 
 \section{Overview}
 
@@ -21,169 +16,176 @@ For the midterm, you should cover all of the following:
 \subitem this review sheet
 \subitem reading assignments marked as “NOTES” on the syllabus
 \subitem all Homework 1. many from Homework 2 also, explicitly listed..
+
+\section{BASIC ML}
+
+
+\subitem \textbf{ Know the formal definition of supervised learning. This involves having a training set of examples (xi , yi ) drawn from a specific distribution, where xi ’s are the data vectors and the yi s are the class labels. Then you are given a test set of xi ’s and asked to estimate the class label.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ The difference between fine-tuning, pre-training, and “training from scratch”.}
+\begin{solution}
 fine-tuning:
 
 \par
 pre-training:
 
-\par:
-training from scratch
-
-\section{Specific material}
-
-\subitem \textbf{ The difference between fine-tuning, pre-training, and “training from scratch”.}
-\begin{solution}
-
+\par
+training from scratch:
 \end{solution}
+
 \subitem \textbf{ Why do you need to have a hold-out validation set?}
 \begin{solution}
-the purpose of the training set is to allow the model to learn parameters associated with different answers to a problem \
-the purpose of the test set is to assess how well the model works, essentially how well it generalizes as a solution to the "real world" problem \
-but there's a step in between training on "real world data" and using the model as a final solution... you want to spend effort making sure the model you trained is the best version of that model it can possibly be. this is why there should be a validation set. \
-first, you train the data and treat the validation set as if it's your test set. you can use variations with the way you treat it as a test set -- for example, cross-validation in order to tune hyperparameters. all a part of model selection. \
-after you're happy with the model, then you can just use that nicely tuned model to do the REAL testing!
+purpose of the training set: allow the model to learn parameters associated with different answers to a problem \newline
+purpose of the test set: assess how well the model works, essentially how well it generalizes as a solution to the "real world" problem \newline \newline 
+but there's a step in between training on "real world data" and using the model as a final solution... you want to spend effort making sure the model you trained is the best version of that model it can possibly be. this is why there should be a validation set. \newline
+first, you train the data and treat the validation set as if it's your test set. you can use variations with the way you treat it as a test set -- for example, cross-validation in order to tune hyperparameters. all a part of model selection. after you're happy with the model, then you can just use that nicely tuned model to do the REAL testing!
 \end{solution}
-\subitem \textbf{ Know the formal definition of supervised learning. This involves having a training set of examples (xi , yi ) drawn from a specific distribution, where xi ’s are the data vectors and the yi s are the class labels. Then you are given a test set of xi ’s and asked to estimate the class label.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametricmodels are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What are the advantages and disadvantages of learned representations compared with hand-crafted}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ representations (SIFT, HOG, etc.)?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Differences between regular neural networks and convolutional neural networks. Main justifications for}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ CNNs over regular neural networks. }
-\begin{solution}
-\end{solution}
-\subsubitem \textbf{ These include the idea that many useful features will be local in the sense that they will only be functions of small areas of the input. While in principle, a standard neural net can learn local features, learning can be faster and more efficient by forcing features to be local. It also dramatically reduces the number of parameters to be learned, which leads to effective training with smaller training sets.}
-\begin{solution}
-\end{solution}
-\subsubitem \textbf{ the idea that if a feature is useful at one position in an image, it is likely to be useful at other}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ positions in the image. This leads to the idea of having many, many copies of the same feature spread over the image, which can be implemented with convolution. This idea has several advantages. First of all, a feature can be learned by combining data from many different parts of the image through parameter sharing. Second, we can learn a feature for a particular part of the image even if we never saw the feature in that location during training. That means we can get}
-\begin{solution}
-\end{solution}
-\subitem \textbf{  away with much less training data.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What is the difference between gradient descent, stochastic gradient descent (SGD), and mini-batch SGD.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Know the update rules of SGD, SGD+momentum, Neterov momentum, AdaGrad, RMSProp, Adam.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What is the difference between these methods with Quasi-Newton methods, i.e. L-BFGS?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Why L-BFGS is not used as often for training deep neural networks?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Different types of non-linearities (ReLU (rectified linear unit), leaky ReLU, tanh, logistic, maxout neuron), and how to make the choice in practice. Understand the advantages and disadvantages of each type of non-linearity. Also, make sure you understand why we need non-linearities in the first place. For example, a network built out of only linear layers can only compute linear functions. This is clear if you write the whole function of the network down. A whole sequence of matrix multiplies is equivalent to another matrix multiple, which means the whole network is linear. Note that a linear}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ network can only compute linear classification boundaries. Thus, you could never separate classes if you can’t draw a linear boundary between them.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What is a ”dead ReLU”? How can you tell if your model is suffering from the problem, and how can you deal with it? How can a dead ReLU come back to life?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Loss functions (negative log loss, multi-class SVM loss, l2 loss, etc.), and how to make the choice in practice.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Make up your own loss. Can you name an appropriate application and say something good or bad about your loss for it?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Now what data loss, regularization loss, and total loss are.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ The motivation behind batch normalization, and why it solves the problem. Know the procedure for training time: estimate mini-batch mean and standard deviation, subtract off mean estimate and divide by standard deviation estimate.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ How can a convolutional layer be implemented as a fully connected layer? How can a fully connected layer be implemented as a convolutional layer?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What is the purpose of regularization? What’s the difference between L2 and L1 regularization? Can you come up with another type of regularization?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Understand how to address the following situations during training: training loss is equal to validation loss (underfitting); training loss is much much lower than validation loss (overfitting); training loss won’t go down (bad initialization or learning rate too low); training loss goes up (learning rate too high).}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ What the problem of disappearing gradients is, and how to deal with it.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Can two neural networks that have different arrangements of weights produce the exact same function?}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Explain how to take a neural network and rearrange the weights to make an equivalent neural network}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ whose weight matrices are different. The professor presented this in class.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Be able to do show that the derivative of the logistic is f (x)(1 − f (x)). Why is this a useful thing to do? Because we already computed f (x) during the forward pass, so it is very cheap to compute the backward pass.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Backpropagation. Be able to do the simple examples from class with pencil and paper.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ How to handle branches in backprop.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Understand how to justify efficient implementations of backprop. For example, if the Jacobian is N ×N , how can I get away with only storing N of its values sometimes? A good example is the derivative of the ReLU function. Since each output of the ReLU is only a function of a single input, all of the “cross derivatives” (element i of input with respect to element j of output) are all 0. Thus, there is no need to store them.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Why could the accuracy on the training set go up significantly when there is a very small relative change in the loss function of a network, especially right after initialization? Answer: when trainingbegins, most of the output values may have nearly equal probability. Thus, a very small increase of the probability of the correct class may render the probability of the correct class higher than all of the others. Thus, the accuracy would go up despite small changes in the probabilities.}
-\begin{solution}
-\end{solution}
-\subitem \textbf{ Suppose I initialize a neural network with small random Gaussian weights. If I have 100 classes, what do I expect the data loss to be after the first forward pass (before the weights have been adapted at all), and why?}
-\begin{solution}
-\end{solution}
+
+
 \subitem \textbf{ Definition of over-fitting. Why it is a problem, how to tell if you have the issue of over-fitting, and how to deal with it.}
 \begin{solution}
 \end{solution}
-\subitem \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: }
+
+\subitem \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: 
+\subsubitem  a) Use a non-square grid (like a hexagonal grid) to better cover the space of hyperparameters settings.
+\subsubitem  b) Rotate the grid so that there are move diverse samples of the individual hyperparameter settings. This is important if one of the hyperparameters is relatively unimportant.}
 \begin{solution}
 \end{solution}
-\subsubitem \textbf{ a) Use a non-square grid (like a hexagonal grid) to better cover the space of hyperparameters settings. }
-\begin{solution}
-\end{solution}
-\subsubitem \textbf{ b) Rotate the grid so that there are move diverse samples of the individual}
-\begin{solution}
-\end{solution}
-\subsubitem \textbf{ hyperparameter settings. This is important if one of the hyperparameters is relatively unimportant.}
-\begin{solution}
-\end{solution}
+
 \subitem \textbf{ How can over-fitting be used for debugging in practice? Answer: you can test whether your networkcan find a way to make the training error zero for a small data set and 0 regularization. If your network can’t do this, there may be a problem with the backprop. }
 \begin{solution}
 \end{solution}
-\subitem \textbf{ Be able to take the derivative of a scalar/vector/matrix w.r.t. a scalar/vector/matrix. What are the shapes of the resulting arrays? }
+
+\subsection{parameters}
+\subitem \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametricmodels are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
 \begin{solution}
 \end{solution}
+
 \subitem \textbf{ The difference between model parameters and hyper-parameters.}
 \begin{solution}
+model parameters are what we aim to LEARN with a machine learning model. in the process of fitting model parameters (aka training step) and evaluating the fit, hyperparameters become important because they influence model performance, and therefore the model selection process 
+\newline
+hyperparameters are "meta properties" about a model, which we can control during experiments, such as:
+\subitem model complexity (number of leaves in tree, depth of tree)
+\subitem model ability to learn (learning rate)
+\subitem other examples: num latent factors in matrix factorization, num clusters in k-means clustering, num hidden layers in neural network
 \end{solution}
 \subitem \textbf{ Strategies for searching optimal hyper-parameters: random search, grid search, and the ”rotated grid search” idea discussed in class.}
 \begin{solution}
 \end{solution}
+
+
+\subsection{loss, regularization}
+
+\subitem \textbf{ Now what data loss, regularization loss, and total loss are.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ What is the purpose of regularization? What’s the difference between L2 and L1 regularization? Can you come up with another type of regularization?}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Understand how to address the following situations during training: training loss is equal to validation loss (underfitting); training loss is much much lower than validation loss (overfitting); training loss won’t go down (bad initialization or learning rate too low); training loss goes up (learning rate too high).}
+\begin{solution}
+\end{solution}
+
 \subitem \textbf{ What is a possible cause if training loss explodes?}
 \begin{solution}
 \end{solution}
-\subitem \textbf{ What is dropout, and how is it related to the concept of model ensembles?}
+
+\subitem \textbf{ Loss functions (negative log loss, multi-class SVM loss, l2 loss, etc.), and how to make the choice in practice.}
 \begin{solution}
 \end{solution}
-\subitem \textbf{ Know how to implement ”inverted dropout”, and why it is usually preferred.}
+
+\subitem \textbf{ Make up your own loss. Can you name an appropriate application and say something good or bad about your loss for it?}
 \begin{solution}
 \end{solution}
+
+\section{SPECIFIC ML ALGOS / DERIVATIVES / GRADIENTS}
+\subitem \textbf{ What is the difference between gradient descent, stochastic gradient descent (SGD), and mini-batch SGD.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Know the update rules of SGD, SGD+momentum, Neterov momentum, AdaGrad, RMSProp, Adam. What is the difference between these methods with Quasi-Newton methods, i.e. L-BFGS?}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Be able to do show that the derivative of the logistic is f (x)(1 − f (x)). Why is this a useful thing to do? Because we already computed f (x) during the forward pass, so it is very cheap to compute the backward pass.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ What the problem of disappearing gradients is, and how to deal with it.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Why L-BFGS is not used as often for training deep neural networks?}
+\begin{solution}
+\end{solution}
+
+\section{NEURAL NETWORKS}
+\subsection{BASIC}
+\subitem \textbf{ Differences between regular neural networks and convolutional neural networks. Main justifications for CNNs over regular neural networks.  These include:
+\subsubitem the idea that many useful features will be local in the sense that they will only be functions of small areas of the input. While in principle, a standard neural net can learn local features, learning can be faster and more efficient by forcing features to be local. It also dramatically reduces the number of parameters to be learned, which leads to effective training with smaller training sets.
+\subsubitem the idea that if a feature is useful at one position in an image, it is likely to be useful at other positions in the image. This leads to the idea of having many, many copies of the same feature spread over the image, which can be implemented with convolution. This idea has several advantages. First of all, a feature can be learned by combining data from many different parts of the image through parameter sharing. Second, we can learn a feature for a particular part of the image even if we never saw the feature in that location during training. That means we can get away with much less training data.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Can two neural networks that have different arrangements of weights produce the exact same function? Explain how to take a neural network and rearrange the weights to make an equivalent neural network whose weight matrices are different. The professor presented this in class.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Backpropagation. Be able to do the simple examples from class with pencil and paper.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ How to handle branches in backprop.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Understand how to justify efficient implementations of backprop. For example, if the Jacobian is N ×N , how can I get away with only storing N of its values sometimes? A good example is the derivative of the ReLU function. Since each output of the ReLU is only a function of a single input, all of the “cross derivatives” (element i of input with respect to element j of output) are all 0. Thus, there is no need to store them.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Why could the accuracy on the training set go up significantly when there is a very small relative change in the loss function of a network, especially right after initialization? 
+\subsubitem Answer: when training begins, most of the output values may have nearly equal probability. Thus, a very small increase of the probability of the correct class may render the probability of the correct class higher than all of the others. Thus, the accuracy would go up despite small changes in the probabilities.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Suppose I initialize a neural network with small random Gaussian weights. If I have 100 classes, what do I expect the data loss to be after the first forward pass (before the weights have been adapted at all), and why?}
+\begin{solution}
+\end{solution}
+
+\subsection{LAYERS}
+
+
+\subitem \textbf{ How can a convolutional layer be implemented as a fully connected layer? How can a fully connected layer be implemented as a convolutional layer?}
+\begin{solution}
+\end{solution}
+
 \subitem \textbf{ What is the problem with randomly initializing all layers with the same Gaussian, even if those layers are different sizes? How do Xavier initialization and improved Xavier initialization (He et al. 2015) solve the problem? You should know how to implement them.}
 \begin{solution}
 \end{solution}
+
+\subitem \textbf{ What is a ”dead ReLU”? How can you tell if your model is suffering from the problem, and how can you deal with it? How can a dead ReLU come back to life?}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Different types of non-linearities (ReLU (rectified linear unit), leaky ReLU, tanh, logistic, maxout neuron), and how to make the choice in practice. Understand the advantages and disadvantages of each type of non-linearity. Also, make sure you understand why we need non-linearities in the first place. For example, a network built out of only linear layers can only compute linear functions. This is clear if you write the whole function of the network down. A whole sequence of matrix multiplies is equivalent to another matrix multiple, which means the whole network is linear. Note that a linear network can only compute linear classification boundaries. Thus, you could never separate classes if you can’t draw a linear boundary between them.}
+\begin{solution}
+\end{solution}
+
+\subsection{UNCLASSIFIED}
+
+\subitem \textbf{ What is dropout, and how is it related to the concept of model ensembles?}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Know how to implement ”inverted dropout”, and why it is usually preferred.}
+\begin{solution}
+\end{solution}
+
 \subitem \textbf{ What is a Bilinear CNN? You should know the task it is dealing with, the motivation behind the network design, and why the backprop can be done efficiently.}
 \begin{solution}
 \end{solution}
@@ -191,16 +193,108 @@ after you're happy with the model, then you can just use that nicely tuned model
 \begin{solution}
 \end{solution}
 
+\section{FEATURES}
+\subitem \textbf{ What are the advantages and disadvantages of learned representations compared with hand-crafted representations (SIFT, HOG, etc.)?}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Be able to take the derivative of a scalar/vector/matrix w.r.t. a scalar/vector/matrix. What are the shapes of the resulting arrays? }
+\begin{solution}
+\end{solution}
+
+
+\section{BATCH NORMALIZATION}
+\subitem \textbf{ The motivation behind batch normalization, and why it solves the problem. Know the procedure for training time: estimate mini-batch mean and standard deviation, subtract off mean estimate and divide by standard deviation estimate.}
+\begin{solution}
+\end{solution}
+
+
 
 
 \section{Homework 1}
+\begin{solution}
+\subsection{K-Nearest Neighbors (KNN)}
 \begin{itemize}
-\item KNN
-\item SVM
-\item Softmax
-\item 2 layer net
-\item features
+\item train: save image data (ie: 20 x 20 pixel image becomes 400 vector of raw pixel values from 0-255)
+\item predict step 1: get distance between all test and training examples
+\newline
+\newline l1 distance/manhattan distance
+\newline $distance(im1, im2) = \sum_p{|im1_p - im2_p|}$ for all $p$ (pixels) in $im1$ 
+\newline l2 distance/euclidean distance
+\newline $distance(im1, im2) = \sqrt{\sum_p{(im1_p - im2_p)^2}}$ for all $p$ (pixels) in $im1$ 
+\newline sum of squared differences/ssd
+\newline $TODO$ for all $p$ (pixels) in $im1$ 
+\item example using l1 norm: 
+\subitem get absolute difference in RAW PIXEL VALUES between im2 and im1
+\subitem  = a matrix the same size as im1 and im2 ($|im1-im2|$)  
+\subitem then, sum all values in that matrix, giving l1 distance metric 
+\subitem (a single positive number, higher value means less similar)
+\item predict step 2. compare test image to all training images with distance metric, and select the average class label that belongs to the k images that return a lowest distance metric
+\item model params:
+\item hyperparams:
+\subitem k (knn is sensitive to k)
+\subitem distance metric
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
 \end{itemize}
+
+\subsection{SVM}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+
+\subsection{Softmax}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+
+\subsection{2 layer net}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+
+\subsection{features}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+\end{solution}
+
+
+
 
 
 \section{Reading assignment notes}
