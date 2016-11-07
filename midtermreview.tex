@@ -10,29 +10,143 @@
 
 \begin{document}
 
-\section{Overview}
-
 For the midterm, you should cover all of the following:
-\subitem this review sheet
-\subitem reading assignments marked as “NOTES” on the syllabus
-\subitem all Homework 1. many from Homework 2 also, explicitly listed..
+\subitem section 1 all Homework 1
+\subitem section 2 - reading assignments marked as “NOTES” on the syllabus
+\subitem section  - end this review sheet (includes Homework 2 questions)
 
-\section{BASIC ML}
-
-
-\subitem \textbf{ Know the formal definition of supervised learning. This involves having a training set of examples (xi , yi ) drawn from a specific distribution, where xi ’s are the data vectors and the yi s are the class labels. Then you are given a test set of xi ’s and asked to estimate the class label.}
+\section{Homework 1}
 \begin{solution}
+\subsection{K-Nearest Neighbors (KNN)}
+\begin{itemize}
+\item train: save image data (ie: 20 x 20 pixel image becomes 400 vector of raw pixel values from 0-255)
+\item predict step 1: get distance between all test and training examples
+\newline
+\newline l1 distance/manhattan distance
+\newline $distance(im1, im2) = \sum_p{|im1_p - im2_p|}$ for all $p$ (pixels) in $im1$ 
+\newline l2 distance/euclidean distance
+\newline $distance(im1, im2) = \sqrt{\sum_p{(im1_p - im2_p)^2}}$ for all $p$ (pixels) in $im1$ 
+\newline sum of squared differences/ssd
+\newline $TODO$ for all $p$ (pixels) in $im1$ 
+\item example using l1 norm: 
+\subitem get absolute difference in RAW PIXEL VALUES between im2 and im1
+\subitem  = a matrix the same size as im1 and im2 ($|im1-im2|$)  
+\subitem then, sum all values in that matrix, giving l1 distance metric 
+\subitem (a single positive number, higher value means less similar)
+\item predict step 2. compare test image to all training images with distance metric, and select the average class label that belongs to the k images that return a lowest distance metric
+\item model params:
+\item hyperparams:
+\subitem k (knn is sensitive to k)
+\subitem distance metric
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
 \end{solution}
 
-\subitem \textbf{ The difference between fine-tuning, pre-training, and “training from scratch”.}
+\subsection{SVM}
 \begin{solution}
-fine-tuning:
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+\end{solution}
 
-\par
-pre-training:
+\subsection{Softmax}
+\begin{solution}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+\end{solution}
 
-\par
-training from scratch:
+\subsection{2 layer net}
+\begin{solution}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+\end{solution}
+
+\subsection{features}
+\begin{solution}
+\begin{itemize}
+\item train:
+\item test:
+\item hyperparams:
+\subitem
+\subitem
+\item \textbf{OVERALL COMMENTS}
+\subitem
+\subitem
+\subitem
+\end{itemize}
+\end{solution}
+
+%%% END HOMEWORK 1 SECTION
+
+
+\section{Reading assignment notes}
+\begin{itemize}
+\item image classification
+\subitem notes
+\item linear classification 1
+\subitem notes
+\item linear classification 2
+\subitem notes
+\item optimization
+\subitem notes
+\item backprop
+\subitem notes
+\item neural networks 1
+\subitem notes
+\item neural networks 2
+\subitem notes
+\item batch normalization 
+\subitem notes
+\item neural networks 3
+\subitem notes
+\item convolutional neural networks
+\subitem notes
+\end{itemize}
+
+%%% END READING ASSIGNMENT NOTES
+
+
+\section{BASIC ML}
+\subitem \textbf{ Know the formal definition of supervised learning. This involves having a training set of examples (xi , yi ) drawn from a specific distribution, where xi ’s are the data vectors and the yi s are the class labels. Then you are given a test set of xi ’s and asked to estimate the class label.}
+\begin{solution}
+\begin{itemize}
+\item training set of $n$ samples from some distribution:
+\subitem $n$ ordered pairs of $(\vec{x_i}, y_i)$ for $i = 1:n$  
+\subitem $\vec{x_i}$ is a vector that represents a single sample point 
+\subitem $y_i$ is the class label for that sample point 
+\item predict class labels for test set of $m$ samples:
+\subitem given $\vec{x_j}$ for $j = 1:m$ vectors representing test samples,
+\subitem estimate the value of class label $y_j$ for $j = 1:m$ 
+\end{itemize}
 \end{solution}
 
 \subitem \textbf{ Why do you need to have a hold-out validation set?}
@@ -43,22 +157,19 @@ but there's a step in between training on "real world data" and using the model 
 first, you train the data and treat the validation set as if it's your test set. you can use variations with the way you treat it as a test set -- for example, cross-validation in order to tune hyperparameters. all a part of model selection. after you're happy with the model, then you can just use that nicely tuned model to do the REAL testing!
 \end{solution}
 
-
 \subitem \textbf{ Definition of over-fitting. Why it is a problem, how to tell if you have the issue of over-fitting, and how to deal with it.}
 \begin{solution}
+overfitting is when a model too closely models the training data, to the point that small variations that are specific to that slice of data are seen as general traits of the overall data domain. it's a problem because predictive power on a test set is the end goal of machine learning tasks, so of course we have to prevent overfitting. also, an model is unnecessarily complex, most likely losing out on efficiency by using too many features or something like that
+\newline \newline 
+How to tell: plot a model's training accuracy and test accuracy over iterations. a model that is not overfit (or underfit) will have a plot with similar training + test accuracy at the same iterations. a model that is overfit to its training data has really good predictive power during training, but much poorer accuracy with test sets.
+\newline 
+How to deal:
+\subitem reduce complexity -- maybe this means reducing depth of tree if it's a tree-based learner, or using fewer features in linear models, like logistic regression \newline 
+\subitem non-parametric models more likely to overfit, since there's more flexibility with learning target functions. must regularize the extent of learning
 \end{solution}
 
-\subitem \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: 
-\subsubitem  a) Use a non-square grid (like a hexagonal grid) to better cover the space of hyperparameters settings.
-\subsubitem  b) Rotate the grid so that there are move diverse samples of the individual hyperparameter settings. This is important if one of the hyperparameters is relatively unimportant.}
-\begin{solution}
-\end{solution}
 
-\subitem \textbf{ How can over-fitting be used for debugging in practice? Answer: you can test whether your networkcan find a way to make the training error zero for a small data set and 0 regularization. If your network can’t do this, there may be a problem with the backprop. }
-\begin{solution}
-\end{solution}
-
-\subsection{parameters}
+\subsection{BASIC ML: parameters}
 \subitem \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametricmodels are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
 \begin{solution}
 \end{solution}
@@ -72,7 +183,14 @@ hyperparameters are "meta properties" about a model, which we can control during
 \subitem model ability to learn (learning rate)
 \subitem other examples: num latent factors in matrix factorization, num clusters in k-means clustering, num hidden layers in neural network
 \end{solution}
+
 \subitem \textbf{ Strategies for searching optimal hyper-parameters: random search, grid search, and the ”rotated grid search” idea discussed in class.}
+\begin{solution}
+\end{solution}
+
+\subitem \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: 
+\subsubitem  a) Use a non-square grid (like a hexagonal grid) to better cover the space of hyperparameters settings.
+\subsubitem  b) Rotate the grid so that there are move diverse samples of the individual hyperparameter settings. This is important if one of the hyperparameters is relatively unimportant.}
 \begin{solution}
 \end{solution}
 
@@ -136,6 +254,19 @@ hyperparameters are "meta properties" about a model, which we can control during
 \begin{solution}
 \end{solution}
 
+
+\subitem \textbf{ The difference between fine-tuning, pre-training, and “training from scratch”.}
+\begin{solution}
+fine-tuning:
+
+\par
+pre-training:
+
+\par
+training from scratch:
+\end{solution}
+
+
 \subitem \textbf{ Backpropagation. Be able to do the simple examples from class with pencil and paper.}
 \begin{solution}
 \end{solution}
@@ -154,6 +285,11 @@ hyperparameters are "meta properties" about a model, which we can control during
 \end{solution}
 
 \subitem \textbf{ Suppose I initialize a neural network with small random Gaussian weights. If I have 100 classes, what do I expect the data loss to be after the first forward pass (before the weights have been adapted at all), and why?}
+\begin{solution}
+\end{solution}
+
+
+\subitem \textbf{ How can over-fitting be used for debugging in practice? Answer: you can test whether your network can find a way to make the training error zero for a small data set and 0 regularization. If your network can’t do this, there may be a problem with the backprop. }
 \begin{solution}
 \end{solution}
 
@@ -208,117 +344,8 @@ hyperparameters are "meta properties" about a model, which we can control during
 \begin{solution}
 \end{solution}
 
+%%% END REVIEW SHEET QUESTIONS SECTION
 
 
-
-\section{Homework 1}
-\begin{solution}
-\subsection{K-Nearest Neighbors (KNN)}
-\begin{itemize}
-\item train: save image data (ie: 20 x 20 pixel image becomes 400 vector of raw pixel values from 0-255)
-\item predict step 1: get distance between all test and training examples
-\newline
-\newline l1 distance/manhattan distance
-\newline $distance(im1, im2) = \sum_p{|im1_p - im2_p|}$ for all $p$ (pixels) in $im1$ 
-\newline l2 distance/euclidean distance
-\newline $distance(im1, im2) = \sqrt{\sum_p{(im1_p - im2_p)^2}}$ for all $p$ (pixels) in $im1$ 
-\newline sum of squared differences/ssd
-\newline $TODO$ for all $p$ (pixels) in $im1$ 
-\item example using l1 norm: 
-\subitem get absolute difference in RAW PIXEL VALUES between im2 and im1
-\subitem  = a matrix the same size as im1 and im2 ($|im1-im2|$)  
-\subitem then, sum all values in that matrix, giving l1 distance metric 
-\subitem (a single positive number, higher value means less similar)
-\item predict step 2. compare test image to all training images with distance metric, and select the average class label that belongs to the k images that return a lowest distance metric
-\item model params:
-\item hyperparams:
-\subitem k (knn is sensitive to k)
-\subitem distance metric
-\item \textbf{OVERALL COMMENTS}
-\subitem
-\subitem
-\subitem
-\end{itemize}
-
-\subsection{SVM}
-\begin{itemize}
-\item train:
-\item test:
-\item hyperparams:
-\subitem
-\subitem
-\item \textbf{OVERALL COMMENTS}
-\subitem
-\subitem
-\subitem
-\end{itemize}
-
-\subsection{Softmax}
-\begin{itemize}
-\item train:
-\item test:
-\item hyperparams:
-\subitem
-\subitem
-\item \textbf{OVERALL COMMENTS}
-\subitem
-\subitem
-\subitem
-\end{itemize}
-
-\subsection{2 layer net}
-\begin{itemize}
-\item train:
-\item test:
-\item hyperparams:
-\subitem
-\subitem
-\item \textbf{OVERALL COMMENTS}
-\subitem
-\subitem
-\subitem
-\end{itemize}
-
-\subsection{features}
-\begin{itemize}
-\item train:
-\item test:
-\item hyperparams:
-\subitem
-\subitem
-\item \textbf{OVERALL COMMENTS}
-\subitem
-\subitem
-\subitem
-\end{itemize}
-\end{solution}
-
-
-
-
-
-\section{Reading assignment notes}
-\begin{itemize}
-\item image classification
-\subitem notes
-\item linear classification 1
-\subitem notes
-\item linear classification 2
-\subitem notes
-\item optimization
-\subitem notes
-\item backprop
-\subitem notes
-\item neural networks 1
-\subitem notes
-\item neural networks 2
-\subitem notes
-\item batch normalization 
-\subitem notes
-\item neural networks 3
-\subitem notes
-\item convolutional neural networks
-\subitem notes
-\end{itemize}
 
 \end{document}
