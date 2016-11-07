@@ -34,14 +34,19 @@ For the midterm, you should cover all of the following:
 \subitem then, sum all values in that matrix, giving l1 distance metric 
 \subitem (a single positive number, higher value means less similar)
 \item predict step 2. compare test image to all training images with distance metric, and select the average class label that belongs to the k images that return a lowest distance metric
+\newline $y = \frac{1}{k}\sum\limits_{i=1}^k{ y_i}$ where $y$ is the final predicted class label
 \item model params:
+\subitem what is learned by this model? just the training data values.. (?)
 \item hyperparams:
-\subitem k (knn is sensitive to k)
+\subitem k: small value of k, large variance in predictions. large value, large model bias
+\subitem k should be set to a value large enough to minimize the probability of misclassification, small enough so that the k nearest points are close enough to the query point
 \subitem distance metric
 \item \textbf{OVERALL COMMENTS}
 \subitem
 \subitem
-\subitem
+\subitem KNN: the Rodney Dangerfield of classifiers 
+\subitem Convergence of K-NN to the Bayes error rate $R^*$
+\subitem Universality of K-NN.
 \end{itemize}
 \end{solution}
 
@@ -170,13 +175,30 @@ How to deal:
 
 
 \subsection{BASIC ML: parameters}
-\subitem \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametricmodels are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
+\subitem \textbf{ The definition of parametric models and non-parametric models. Give an example for each that is covered in the lectures. The name “non-parametric” model is a poor name, since non-parametric models are usually models in which the number of parameters grows with the number of data points, as in K-nearest neighbors. The key idea is that a non-parametric model is a model that does not have a fixed number of parameters. A parametric model is a model with a fixed number of parameters. }
 \begin{solution}
+parametric: linear/logistic regression, linear discriminant analysis, perceptron, naive bayes, simple neural networks
+\begin{itemize}
+\item step 1: Select a form for the function that maps data $\vec{x}$ to label $y$
+\item step 2: Learn the params (coefficients) for the function from the training data
+\item step 3: after learning a vector of params, simply plug in the values and you get the prediction
+\item ex: linear regression model learns params (intercept + coefs for each feature) from training data. to score test samples, simply give the sample's values for each feature, apply coefficients and intercept, and prediction is made
+\end{itemize}
+
+non parametric: k-NN, decision trees, SVM
+\begin{itemize}
+\item allows more information to pass from the current set of data that is attached to the model at the current state, to be able to predict any future data
+\item parameters are usually said to be infinite in dimensions and so can express the characteristics in the data much better than parametric models
+\item has more degrees of freedom and is therefore more flexible 
+\item doesn't make strong assumptions of the function that maps data to output (step 1 of param models)
+\item ex: k-NN simply assumes that similar objects have similar output values, has about $\frac{n}{k}$ degrees of freedom, where $n$ is number of data points
+\item ex: Gaussian mixture model for example has more flexibility to express the data in form of multiple gaussian distributions
+\end{itemize}
 \end{solution}
 
 \subitem \textbf{ The difference between model parameters and hyper-parameters.}
 \begin{solution}
-model parameters are what we aim to LEARN with a machine learning model. in the process of fitting model parameters (aka training step) and evaluating the fit, hyperparameters become important because they influence model performance, and therefore the model selection process 
+model parameters are what we aim to LEARN with a machine learning model (often denoted $W$ or $\theta$). in the process of fitting model parameters (aka training step) and evaluating the fit, hyperparameters become important because they influence model performance, and therefore the model selection process 
 \newline
 hyperparameters are "meta properties" about a model, which we can control during experiments, such as:
 \subitem model complexity (number of leaves in tree, depth of tree)
@@ -186,6 +208,19 @@ hyperparameters are "meta properties" about a model, which we can control during
 
 \subitem \textbf{ Strategies for searching optimal hyper-parameters: random search, grid search, and the ”rotated grid search” idea discussed in class.}
 \begin{solution}
+\begin{itemize}
+\item grid search: manually, exhaustively try out all combos of hyperparameters in fixed hyperparam space. 
+\subitem if the best values are not in that fixed space, you're not going to find them
+\subitem if you want to try $5$ values of each param, you'll run $5^n$ experiments for a model with $n$ hyperparams
+\item random search: try out combos of hyperparameters that are selected randomly
+\subitem 95\% likely find combo of parameters within the 5\% optima within 60 iters 
+\subsubitem each random sample out of $n$ samples 5\% likely in 5\% interval around true maximum
+\subsubitem likelihood that all $n$ samples miss that 5\% top max interval is $(1-0.05)^n$
+\subsubitem likelihood at least 1 hitting $1-(1-0,05)^n$
+\subsubitem to find $n$, set  $1-(1-0,05)^n > 0.95$, or other desired confidence level = 60
+\subitem high level why better than grid: often, some hyperparameters do not significantly affect the loss. having randomly dispersed data gives more "textured" data than an exhaustive search over parameters that ultimately do not affect the loss. searching over arbitrarily defined hyperparam space means you're not necessarily looking at the objective function in the "right places"... if you randomly select those parameters, they will be more aligned with local minima and maxima in the objective function
+\item rotated grid search:
+\end{itemize}
 \end{solution}
 
 \subitem \textbf{ Name one problem with grid search for exploring hyperparameter settings. Name one advantage relative to random sampling of hyperparameter settings. Understand the professor’s suggestions for fixing these problems: 
@@ -197,12 +232,32 @@ hyperparameters are "meta properties" about a model, which we can control during
 
 \subsection{loss, regularization}
 
-\subitem \textbf{ Now what data loss, regularization loss, and total loss are.}
+\subitem \textbf{ Know what data loss, regularization loss, and total loss are.}
 \begin{solution}
+\begin{itemize}
+\item data loss: difference between actual and predicted label 
+\item regularization loss: 
+\item total loss:
+\end{itemize}
 \end{solution}
 
 \subitem \textbf{ What is the purpose of regularization? What’s the difference between L2 and L1 regularization? Can you come up with another type of regularization?}
 \begin{solution}
+\begin{itemize}
+\item purpose of regularization: to tune model complexity, to improve generalization by preventing over/underfitting. this is achieved by penalizing loss function, by adding a term to the loss function that adjusts learned weights
+\item l1 vs l2: 
+\subitem L2 is the sum of the square of the weights 
+\subitem $w^* = arg\min{w}\sum_j{(test - hypothesis)^2} + \lambda \sum\limits_{i=1}^k{|w_i|}$
+\subitem L1 is just the sum of the weights 
+\subitem $w^* = arg\min{w}\sum_j{(test - hypothesis)^2} + \lambda \sum\limits_{i=1}^k{w_i^2}$
+\item l1 no analytical solution, computationally inefficient on non-sparse cases, have to couple with sparse algos to make more efficient
+\subitem sparse output, lots of 0s in coefficient matrix
+\subitem automatically gets rid of correlated features because they have close to 0 values in coefficient matrix
+\item l2 computationally efficient, has analytical solution
+\subitem non sparse output, so no feature selection
+\item another type of regularization:
+\end{itemize}
+
 \end{solution}
 
 \subitem \textbf{ Understand how to address the following situations during training: training loss is equal to validation loss (underfitting); training loss is much much lower than validation loss (overfitting); training loss won’t go down (bad initialization or learning rate too low); training loss goes up (learning rate too high).}
@@ -215,6 +270,20 @@ hyperparameters are "meta properties" about a model, which we can control during
 
 \subitem \textbf{ Loss functions (negative log loss, multi-class SVM loss, l2 loss, etc.), and how to make the choice in practice.}
 \begin{solution}
+\begin{itemize}
+\item l1, least absolute deviations (LAD, least absolute errors (LAE)
+\subitem minimize sum of the absolute differences between true $y_i$ and predicted value $f(x_i)$
+\subitem robust to outliers, so good when should ignore outliers
+\subitem unstable solution -- horizontal adjustment in data can change regression line 
+\subitem possibly multiple solutions
+\item l2, least squares error (LSE)
+\subitem minimize sum of the square of differences between true $y_i$ and  predicted value $f(x_i)$
+\subitem sensitive to outliers, so useful when don't wanna ignore them
+\subitem stable solution -- regression parameters are continuous functions of data, so horizontal adjustment of data doesn't change regression lines greatly 
+\subitem only 1 solution
+\item negative log loss
+\item multi-class SVM loss
+\end{itemize}
 \end{solution}
 
 \subitem \textbf{ Make up your own loss. Can you name an appropriate application and say something good or bad about your loss for it?}
